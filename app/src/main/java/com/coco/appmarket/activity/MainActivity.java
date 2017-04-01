@@ -5,6 +5,8 @@ import android.support.v4.view.ViewPager;
 import com.coco.appmarket.R;
 import com.coco.appmarket.adapter.MyPagerAdapter;
 import com.coco.appmarket.base.BaseActivity;
+import com.coco.appmarket.base.BaseFragment;
+import com.coco.appmarket.fragment.FragmentFactory;
 
 public class MainActivity extends BaseActivity {
 
@@ -13,7 +15,23 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initEvent() {
+        inditor_viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                BaseFragment fragment = FragmentFactory.createFragment(position);
+                fragment.loadData();
+            }
 
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override
@@ -34,4 +52,24 @@ public class MainActivity extends BaseActivity {
         return R.layout.activity_main;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        inditor_viewpager.removeOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
 }

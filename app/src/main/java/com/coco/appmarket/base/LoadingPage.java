@@ -1,8 +1,13 @@
 package com.coco.appmarket.base;
 
 import android.content.Context;
+import android.support.annotation.AttrRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
+
 import com.coco.appmarket.R;
 import com.coco.appmarket.utils.ThreadManager;
 import com.coco.appmarket.utils.UIUtils;
@@ -26,37 +31,37 @@ public abstract class LoadingPage extends FrameLayout {
     private View mSuccessView;
 
     public LoadingPage(Context context) {
-        super(context);
+        this(context, null);
+    }
+
+    public LoadingPage(@NonNull Context context, @Nullable AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public LoadingPage(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
         initView();
     }
 
-    /**
-     * 初始化布局
-     */
+    //初始化布局
     private void initView() {
-        // 正在加载
-        if (mLoadingView == null) {
+        if (mLoadingView == null) {// 正在加载
             mLoadingView = onCreateLoadingView();
             addView(mLoadingView);
         }
 
-        // 加载失败
-        if (mErrorView == null) {
+        if (mErrorView == null) {// 加载失败
             mErrorView = onCreateErrorView();
-            // 点击重试
-            mErrorView.findViewById(R.id.btn_retry).setOnClickListener(
-                    new OnClickListener() {
-
-                        @Override
-                        public void onClick(View v) {
-                            loadData();
-                        }
-                    });
+            mErrorView.findViewById(R.id.btn_retry).setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {// 点击重试
+                    loadData();
+                }
+            });
             addView(mErrorView);
         }
 
-        // 数据为空
-        if (mEmptyView == null) {
+        if (mEmptyView == null) {// 数据为空
             mEmptyView = onCreateEmptyView();
             addView(mEmptyView);
         }
@@ -64,9 +69,7 @@ public abstract class LoadingPage extends FrameLayout {
         showRightPage();
     }
 
-    /**
-     * 根据当前状态,展示正确页面
-     */
+    //根据当前状态,展示正确页面
     private void showRightPage() {
         if (mLoadingView != null) {
             mLoadingView.setVisibility((mCurrentState == STATE_LOADING || mCurrentState == STATE_UNLOAD) ? View.VISIBLE : View.GONE);
@@ -93,35 +96,13 @@ public abstract class LoadingPage extends FrameLayout {
         }
     }
 
-    /**
-     * 初始化正在加载布局
-     */
-    private View onCreateLoadingView() {
-        return UIUtils.inflate(R.layout.layout_loading);
-    }
-
-    /**
-     * 初始化加载失败布局
-     */
-    private View onCreateErrorView() {
-        return UIUtils.inflate(R.layout.layout_error);
-    }
-
-    /**
-     * 初始化数据为空布局
-     */
-    private View onCreateEmptyView() {
-        return UIUtils.inflate(R.layout.layout_empty);
-    }
-
-    /**
-     * 初始化访问成功布局, 子类必须实现
-     */
+    //初始化访问成功布局, 子类必须实现
     public abstract View onCreateSuccessView();
 
-    /**
-     * 加载数据
-     */
+    //加载网络数据，返回加载状态
+    public abstract ResultState onLoad();
+
+    //加载数据
     public void loadData() {
         // 状态归零
         if (mCurrentState == STATE_LOAD_EMPTY || mCurrentState == STATE_LOAD_ERROR || mCurrentState == STATE_LOAD_SUCCESS) {
@@ -150,16 +131,7 @@ public abstract class LoadingPage extends FrameLayout {
         }
     }
 
-    /**
-     * 加载网络数据,必须子类实现
-     *
-     * @return 返回加载状态
-     */
-    public abstract ResultState onLoad();
-
-    /**
-     * 使用枚举表示访问网络的几种状态
-     */
+    //使用枚举表示访问网络的几种状态
     public enum ResultState {
         STATE_SUCCESS(STATE_LOAD_SUCCESS), // 访问成功
         STATE_EMPTY(STATE_LOAD_EMPTY), // 数据为空
@@ -173,6 +145,21 @@ public abstract class LoadingPage extends FrameLayout {
         public int getState() {
             return state;
         }
+    }
+
+    //初始化正在加载布局
+    private View onCreateLoadingView() {
+        return UIUtils.inflate(R.layout.layout_loading);
+    }
+
+    //初始化加载失败布局
+    private View onCreateErrorView() {
+        return UIUtils.inflate(R.layout.layout_error);
+    }
+
+    //初始化数据为空布局
+    private View onCreateEmptyView() {
+        return UIUtils.inflate(R.layout.layout_empty);
     }
 
 }

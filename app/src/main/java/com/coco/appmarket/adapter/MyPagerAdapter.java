@@ -3,7 +3,6 @@ package com.coco.appmarket.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
 
 import com.coco.appmarket.R;
 import com.coco.appmarket.fragment.FragmentFactory;
@@ -14,8 +13,6 @@ import com.coco.appmarket.utils.UIUtils;
  */
 
 public class MyPagerAdapter extends FragmentPagerAdapter {
-
-    private static final String TAG = "FragmentPagerAdapter";
     private String[] mTabNames;// 页签名称集合
 
     public MyPagerAdapter(FragmentManager fm) {

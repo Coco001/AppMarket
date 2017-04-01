@@ -18,7 +18,6 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mLoadingPage = new LoadingPage(UIUtils.getContext()) {
-
             @Override
             public View onCreateSuccessView() {
                 return BaseFragment.this.onCreateSuccessView();
@@ -28,7 +27,6 @@ public abstract class BaseFragment extends Fragment {
             public ResultState onLoad() {
                 return BaseFragment.this.onLoad();
             }
-
         };
         return mLoadingPage;
     }
@@ -46,9 +44,7 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
-    /**
-     * 校验数据的合法性,返回相应的状态
-     */
+    //校验数据的合法性,返回相应的状态
     public LoadingPage.ResultState check(Object data) {
         if (data != null) {
             if (data instanceof List) {//判断当前对象是否是一个集合

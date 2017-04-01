@@ -12,6 +12,7 @@
         android:id="@+id/inditor_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         app:tabIndicatorColor="@color/blue"
         app:tabSelectedTextColor="@color/blue"
         app:tabTextColor="@color/gray"

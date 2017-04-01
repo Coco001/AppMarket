@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class FragmentFactory {
 
 	// 保存Fragment集合,方便复用
-	private static HashMap<Integer, BaseFragment> sFragmentMap = new HashMap<Integer, BaseFragment>();
+	private static HashMap<Integer, BaseFragment> sFragmentMap = new HashMap<>();
 
 	// 根据指针位置,生产相应的Fragment
 	public static BaseFragment createFragment(int position) {

@@ -11,6 +11,7 @@ import com.coco.appmarket.base.BaseFragment;
 import com.coco.appmarket.base.LoadingPage;
 import com.coco.appmarket.protocol.RecoProtocol;
 import com.coco.appmarket.utils.UIUtils;
+import com.coco.appmarket.utils.fly.ShakeListener;
 import com.coco.appmarket.utils.fly.StellarMap;
 
 import java.util.ArrayList;
@@ -26,13 +27,21 @@ public class RecommendFragment extends BaseFragment {
 
     @Override
     public View onCreateSuccessView() {
-        StellarMap view = (StellarMap) View.inflate(UIUtils.getContext(), R.layout.fragment_recommend, null);
+        final StellarMap view = (StellarMap) View.inflate(UIUtils.getContext(), R.layout.fragment_recommend, null);
         RecAdapter adapter = new RecAdapter();
         view.setAdapter(adapter);
         view.setRegularity(6, 9);//9行6列的格子
         int padding = UIUtils.dip2px(18);
         view.setInnerPadding(padding, padding, padding, padding);//设置内边界
         view.setGroup(0, true);//设置第一页显示
+        //设置摇晃的监听事件
+        ShakeListener shakeListener = new ShakeListener(UIUtils.getContext());
+        shakeListener.setOnShakeListener(new ShakeListener.OnShakeListener() {
+            @Override
+            public void onShake() {
+                view.zoomIn();//跳转到下一页
+            }
+        });
         return view;
     }
 

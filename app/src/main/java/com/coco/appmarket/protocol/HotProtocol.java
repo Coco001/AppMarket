@@ -6,14 +6,14 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 
 /**
- * 推荐界面的网络请求
+ * 排行界面的网络请求
  */
 
-public class RecoProtocol extends BaseProtocol<ArrayList<String>> {
+public class HotProtocol extends BaseProtocol<ArrayList<String>> {
 
     @Override
     public String getKey() {
-        return "recommend";
+        return "hot";
     }
 
     @Override

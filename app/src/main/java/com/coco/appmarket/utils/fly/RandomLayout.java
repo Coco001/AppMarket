@@ -263,9 +263,9 @@ public class RandomLayout extends ViewGroup {
 	/** 内部类、接口 */
 	public static interface Adapter {
 
-		public abstract int getCount();
+		int getCount();
 
-		public abstract View getView(int position, View convertView);
+		View getView(int position, View convertView);
 	}
 
 	public static class LayoutParams extends ViewGroup.LayoutParams {

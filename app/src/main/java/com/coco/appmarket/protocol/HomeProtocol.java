@@ -2,6 +2,8 @@ package com.coco.appmarket.protocol;
 
 import com.coco.appmarket.base.BaseProtocol;
 import com.coco.appmarket.bean.AppInfo;
+import com.coco.appmarket.utils.HttpHelper;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,7 +51,7 @@ public class HomeProtocol extends BaseProtocol<ArrayList<AppInfo>> {
             JSONArray ja1 = jo.getJSONArray("picture");
             pictures = new ArrayList<>();
             for (int i = 0; i < ja1.length(); i++) {
-                String pic = ja1.getString(i);
+                String pic = HttpHelper.URL + "image?name=" + ja1.getString(i);
                 pictures.add(pic);
             }
             return appInfoList;

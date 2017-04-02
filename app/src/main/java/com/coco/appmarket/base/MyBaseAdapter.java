@@ -36,7 +36,7 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter{
     }
 
     //普通的布局类型有可能返回多种类型，子类重写该方法，可以返回更多普通布局类型
-    private int getInnerType(int position) {
+    public int getInnerType(int position) {
         return LOAD_MORE_DISABLE;
     }
 

@@ -1,18 +1,18 @@
 package com.coco.appmarket.fragment;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.content.Intent;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-
 import com.bumptech.glide.Glide;
 import com.coco.appmarket.R;
+import com.coco.appmarket.activity.HomeDetailActivity;
 import com.coco.appmarket.base.BaseApplication;
 import com.coco.appmarket.base.BaseFragment;
 import com.coco.appmarket.base.LoadingPage;
@@ -26,9 +26,7 @@ import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.loader.ImageLoader;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * 首页
@@ -56,6 +54,19 @@ public class HomeFragment extends BaseFragment {
 		listView.addHeaderView(mBanner);
 		HomeAdapter adapter = new HomeAdapter(mData);
 		listView.setAdapter(adapter);
+		//设置条目监听
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent intent = new Intent(UIUtils.getContext(), HomeDetailActivity.class);
+                //获取点击的对象
+                AppInfo info = mData.get(position - 1);
+                if (info != null) {
+                    intent.putExtra("packageName", info.packageName);
+                }
+                startActivity(intent);
+			}
+		});
 		return view;
 	}
 

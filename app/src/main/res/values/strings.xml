@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">应用市场</string>
 
+    <string name="app_state_download">下载</string>
+    <string name="app_state_paused">暂停</string>
+    <string name="app_state_error">失败</string>
+    <string name="app_state_waiting">等待</string>
+    <string name="app_state_downloaded">安装</string>
+
+
     <string-array name="tab_names">
         <item>首页</item>
         <item>应用</item>

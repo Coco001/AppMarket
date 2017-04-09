@@ -1,11 +1,14 @@
 package com.coco.appmarket.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import com.coco.appmarket.R;
+import com.coco.appmarket.activity.HomeDetailActivity;
 import com.coco.appmarket.base.BaseApplication;
 import com.coco.appmarket.base.BaseFragment;
 import com.coco.appmarket.base.BaseHolder;
@@ -14,6 +17,8 @@ import com.coco.appmarket.base.MyBaseAdapter;
 import com.coco.appmarket.bean.AppInfo;
 import com.coco.appmarket.holder.AppHolder;
 import com.coco.appmarket.protocol.AppProtocol;
+import com.coco.appmarket.utils.UIUtils;
+
 import java.util.ArrayList;
 
 /**
@@ -31,6 +36,18 @@ public class AppFragment extends BaseFragment {
 		ListView listView = (ListView) view.findViewById(R.id.app_listview);
 		AppAdapter adapter = new AppAdapter(mData);
 		listView.setAdapter(adapter);
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent intent = new Intent(UIUtils.getContext(), HomeDetailActivity.class);
+				//获取点击的对象
+				AppInfo info = mData.get(position);
+				if (info != null) {
+					intent.putExtra("packageName", info.packageName);
+				}
+				startActivity(intent);
+			}
+		});
 		return view;
 	}
 

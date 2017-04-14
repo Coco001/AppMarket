@@ -64,12 +64,14 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
+                <FrameLayout
+                    android:id="@+id/fl_download"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_download"/>
+                    android:layout_height="wrap_content">
+                </FrameLayout>
 
                 <TextView
+                    android:id="@+id/tv_download"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"

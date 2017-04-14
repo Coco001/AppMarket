@@ -39,4 +39,6 @@
     <!--标签Tab选中的颜色-->
     <color name="color_selected">#1da8fe</color>
 
+    <color name="progress">#0294f0</color>
+
 </resources>
